@@ -30,6 +30,7 @@
       <ul class="col-md-12 nav justify-content-end pt-3">
         <li class="nav-item"><a class="nav-link" href="https://lostinthesource.com">Blog</a></li>
         <li class="nav-item"><a class="nav-link" href="https://lostinthesource.com/podcast">Podcast</a></li>
+        <button id="colourModeBtn" class="btn btn-sm w-10 mb-3 set-defaults fw-500 btn-pri-local"></button>
       </ul>
 
     </section>
@@ -40,7 +41,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-6 d-flex flex-column justify-content-center">
-              <img src="images/logo.jpg" class="img-fluid" alt="">
+              <img src="images/logo.png" class="img-fluid" alt="">
             </div>
             <div class="col-md-6 d-flex flex-column justify-content-center">
               <h1 class=" heading-font">Developer Advocate & Professional Rubber Duck*</h1>
@@ -79,6 +80,32 @@
   </div>
   <script>
     document.getElementById("year").innerHTML = new Date().getFullYear();
+
+    const toggleColourModeBtn = document.getElementById("colourModeBtn");
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if(isDark){
+      toggleColourModeBtn.innerText = "Go Light 🌞"
+    } else {
+      toggleColourModeBtn.innerText = "Go Dark 🌚"
+    }
+
+    toggleColourModeBtn.addEventListener("click", function () {
+      if (isDark) {
+        document.body.classList.toggle("light");
+        toggleColourModeBtn.innerText = "Go Light 🌞"
+        if(document.body.classList.value == "light"){
+          toggleColourModeBtn.innerText = "Go Dark 🌚"
+        }
+      } else {
+        document.body.classList.toggle("dark");
+        toggleColourModeBtn.innerText = "Go Dark 🌚"
+        if(document.body.classList.value == "dark"){
+          toggleColourModeBtn.innerText = "Go Light 🌞"
+        }
+      }
+    });
+
   </script>
 </body>
 
