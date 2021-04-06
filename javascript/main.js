@@ -1,11 +1,9 @@
-document.getElementById("year").innerHTML = new Date().getFullYear();
-
 const toggleColourModeBtn = document.getElementById("colourModeBtn");
-const sysIsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const currentColourMode = localStorage.getItem("colourMode");
+const sysIsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 let colourMode;
 setSavedColourMode(currentColourMode);
-setColourModeBtnText(currentColourMode);
+setColourModeBtnText(currentColourMode, sysIsDark);
 
 toggleColourModeBtn.addEventListener("click", function () {
     toggleColourMode(sysIsDark);
@@ -20,8 +18,8 @@ function setSavedColourMode(mode) {
     }
 }
 
-function setColourModeBtnText(mode) {
-    if(mode == "dark"){
+function setColourModeBtnText(mode, sysIsDark) {
+    if((mode == "dark") || (sysIsDark && mode != "light")){
         assignColourModeBtnTextLight();
     } else {
         assignColourModeBtnTextDark();
