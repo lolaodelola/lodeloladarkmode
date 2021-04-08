@@ -1,69 +1,49 @@
 const toggleColourModeBtn = document.getElementById("colourModeBtn");
 const currentColourMode = localStorage.getItem("colourMode");
 const sysIsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-let colourMode;
-setSavedColourMode(currentColourMode);
-setColourModeBtnText(currentColourMode, sysIsDark);
+
+getSavedColourMode(currentColourMode);
+getColourModeBtnText(currentColourMode, sysIsDark);
 
 toggleColourModeBtn.addEventListener("click", function () {
     toggleColourMode(sysIsDark);
-    localStorage.setItem("colourMode", colourMode);
+    setAndSaveColourMode();
 });
 
-function setSavedColourMode(mode) {
-    if (mode == "dark") {
-        document.body.classList = "dark";
-    } else if (mode == "light") {
-        document.body.classList = "light";
+function getSavedColourMode(savedMode) {
+    if (localStorage.getItem("overRideSysColour") == "true") {
+        document.body.classList.remove('systemDarkPreference');
+        document.body.classList.toggle(savedMode);
     }
 }
 
-function setColourModeBtnText(mode, sysIsDark) {
-    if((mode == "dark") || (sysIsDark && mode != "light")){
+function getColourModeBtnText(mode, currentSysIsDark) {
+    if((mode == "dark") || (currentSysIsDark && mode != "light")){
         assignColourModeBtnTextLight();
     } else {
         assignColourModeBtnTextDark();
     }
 }
 
-function toggleColourMode(systemColourMode) {
-    if (systemColourMode) {
-        setBodyClassLight();
-        if(document.body.classList.value == "light"){
-            assignColourModeBtnTextDark();
-            assignColourModeLight();
-        } else {
-            assignColourModeBtnTextLight();
-            assignColourModeDark();
-        }
+function toggleColourMode(currentSysIsDark) {
+    const isUsingSystemColours = document.body.classList.contains('systemColourPreference');
+    const isDark = (isUsingSystemColours && currentSysIsDark) || document.body.classList.contains('dark');
+
+    document.body.classList.remove('systemDarkPreference');
+    document.body.classList.toggle('dark', !isDark);
+}
+
+function setAndSaveColourMode() {
+    let colourMode;
+    if (document.body.classList.contains("dark")) {
+        colourMode = "dark";
+        assignColourModeBtnTextLight();
     } else {
-        setBodyClassDark();
-        if(document.body.classList.value == "dark"){
-            assignColourModeBtnTextLight();
-            assignColourModeDark();
-        } else {
-            assignColourModeBtnTextDark();
-            assignColourModeLight();
-        }
+        colourMode = "light";
+        assignColourModeBtnTextDark();
     }
-}
-
-function setBodyClassLight() {
-    document.body.classList.remove("dark");
-    document.body.classList.toggle("light");
-}
-
-function setBodyClassDark() {
-    document.body.classList.remove("light");
-    document.body.classList.toggle("dark");
-}
-
-function assignColourModeLight() {
-    colourMode = "light"
-}
-
-function assignColourModeDark() {
-    colourMode = "dark"
+    localStorage.setItem("colourMode", colourMode);
+    localStorage.setItem("overRideSysColour", "true")
 }
 
 function assignColourModeBtnTextLight() {
