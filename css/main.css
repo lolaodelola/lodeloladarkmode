@@ -130,44 +130,4 @@ body.dark a:hover {
     text-decoration: none;
   }
 
-  /* Light */
-
-  body {
-    background-color: white;
-    color: #343a40;
-  }
-
-   .btn-pri-local {
-    border: solid 2px #74235D;
-    color: #74235D;
-  }
-
-  .btn-sec-local {
-    border: solid 2px #74235D;
-    background-color: #74235D;
-    color: #fff;
-  }
-
-   .btn-sec-local:hover, body.light .btn-pri-local:hover {
-    border: solid 2px #B7718C;
-    color: #B7718C;
-    background-color: #fff;
-  }
-
-   a {
-    color: #74235D;
-  }
-
-  a:hover {
-    color: #B7718C;
-    text-decoration: none;
-  }
 }
-
-
-/*.btn-disabled-local, .btn-disabled-local:hover {*/
-/*  border: solid 2px #808080;*/
-/*  color: #808080;*/
-/*  text-decoration: line-through;*/
-/*  cursor: not-allowed;*/
-/*}*/

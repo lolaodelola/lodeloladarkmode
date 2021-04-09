@@ -26,8 +26,8 @@ function getColourModeBtnText(mode, currentSysIsDark) {
 }
 
 function toggleColourMode(currentSysIsDark) {
-    const isUsingSystemColours = document.body.classList.contains('systemColourPreference');
-    const isDark = (isUsingSystemColours && currentSysIsDark) || document.body.classList.contains('dark');
+    const hasSystemDarkClass = document.body.classList.contains('systemDarkPreference');
+    const isDark = (hasSystemDarkClass && currentSysIsDark) || document.body.classList.contains('dark');
 
     document.body.classList.remove('systemDarkPreference');
     document.body.classList.toggle('dark', !isDark);
